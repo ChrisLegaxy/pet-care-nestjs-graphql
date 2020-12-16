@@ -1,0 +1,13 @@
+# For those that doesn't have Postgresql install, run this before starting up the project
+version: '3.7'
+
+services:
+  
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nest_graphql
+    ports:
+      - '5432:5432'
