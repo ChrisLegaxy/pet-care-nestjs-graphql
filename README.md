@@ -24,10 +24,67 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Status
+- In Development
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Expected Duration
+- 1 Week
 
+# Description
+A personal project about pet care system developed in purpose of learning about GraphQL with NestJS
+
+# Technology
+- Nest JS
+- TypeORM with Postgres Database
+- GraphQL
+
+# CI/CD
+- Github Action
+
+# Deployment Technology
+- Docker
+
+# Features
+- Authencation (Login, Register, OAuth with Facebook, Google, plus Phone Number OTP)
+- Graphql's Query & Mutation (Admins, Owners & Pets)
+- Nest JS related (File Upload, Passport Authentication)
+- Cursor Pagination
+- Validation Pipeline
+
+# API
+- ADMIN
+  - READ
+    - List admins
+    - List owners 
+    - List pets
+    - List pets belonging to an owner
+
+  - CREATE & UPDATE (CU)
+    - CU admins
+    - CU owners
+    - CU pets
+
+  - DELETE
+    - Delete admins
+    - Delete owners (CASCADE pets)
+    - Delete pets
+
+- OWNER
+  - Owner registration through Email & Password or Social Sign In
+  - Register pet byself
+
+# Author
+  Vansen Hengmeanrith known as *Chris* - *chris.vshmr@gmail.com*
+
+# Date
+  - Started: 17 Dec 2020
+  - Ended: N/A
+
+
+</br>
+</br>
+
+# Get Started
 ## Installation
 
 ```bash
@@ -59,7 +116,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
+# Nest JS Team
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
