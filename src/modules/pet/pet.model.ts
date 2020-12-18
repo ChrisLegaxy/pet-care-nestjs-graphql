@@ -10,13 +10,13 @@
 /**
  * * Nest JS & Package Imports
  */
-import { Field } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 /**
  * * Local Imports
  */
 import { Abstract } from 'src/shared/abstract.model';
+import { PetKind } from '../pet-kind/pet-kind.model';
 
 // 'IN' meaning the pet is inside the care taking
 // 'OUT' meaning the is not inside or the owner took it back home
@@ -45,4 +45,7 @@ export class Pet extends Abstract {
     default: PetStatus.IN
   })
   status: PetStatus;
+
+  @ManyToOne(_type => PetKind, { nullable: true })
+  kind: PetKind;
 }
