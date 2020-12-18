@@ -7,9 +7,9 @@
  * @since - 17 Dec 2020
  */
 
- /**
-  * * Nest JS Module Imports
-  */
+/**
+ * * Nest JS Module Imports
+ */
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
