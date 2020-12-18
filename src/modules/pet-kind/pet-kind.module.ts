@@ -17,10 +17,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
  * * Internal Imports
  */
 import { PetKindRepository } from './pet-kind.repository';
+import { PetKindService } from './pet-kind.service';
 
+/**
+ * @module PetKind
+ */
 @Module({
   imports: [
     TypeOrmModule.forFeature([PetKindRepository])
-  ]
+  ],
+  providers: [PetKindService]
 })
 export class PetKindModule {}
