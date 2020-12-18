@@ -11,8 +11,16 @@
  * * Nest JS Module Imports
  */
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
+/**
+ * * Internal Imports
+ */
+import { PetKindRepository } from './pet-kind.repository';
 
 @Module({
+  imports: [
+    TypeOrmModule.forFeature([PetKindRepository])
+  ]
 })
 export class PetKindModule {}
