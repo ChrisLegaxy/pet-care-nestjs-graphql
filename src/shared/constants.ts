@@ -16,7 +16,8 @@ export enum PetStatus {
 
 export enum Gender {
   MALE = 'MALE',
-  FEMALE = 'FEMALE'
+  FEMALE = 'FEMALE',
+  DIVERSE = 'DIVERSE'
 }
 
 export enum Role {
