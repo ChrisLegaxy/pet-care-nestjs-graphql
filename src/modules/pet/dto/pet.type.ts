@@ -10,13 +10,15 @@
 /**
  * * Nest JS & Package Imports
  */
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 /**
  * * Pet & Local Imports
  */
 import { AbstractType } from '@/shared/abstract.type';
 import { PetStatus } from '../pet.model';
+import { PetKind } from '@/modules/pet-kind/pet-kind.model';
+import { PetKindType } from '@/modules/pet-kind/dto/pet-kind.type';
 
 /**
  * * Enum Registration
@@ -31,15 +33,18 @@ registerEnumType(PetStatus, {
  */
 @ObjectType('Pet')
 export class PetType extends AbstractType {
-  @Field({ description: 'Name of the pet' })
+  @Field(_type => String, { description: 'Name of the pet' })
   name: string;
 
-  @Field({ description: 'Age of the pet' })
+  @Field(_type => Int, { description: 'Age of the pet' })
   age: number;
 
-  @Field({ nullable: true, description: 'Picture of the pet' })
+  @Field(_type => String, { nullable: true, description: 'Picture of the pet' })
   picture: string;
 
   @Field(_type => PetStatus, { description: 'Status of the pet'})
   status: PetStatus;
+
+  @Field(_type => PetKindType, { nullable: true })
+  kind: PetKindType;
 }
