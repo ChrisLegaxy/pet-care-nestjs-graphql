@@ -25,6 +25,9 @@ import { CreatePetInput, UpdatePetInput } from './dto/pet.input';
 import { PetKindService } from '../pet-kind/pet-kind.service';
 import { PetKindType } from '../pet-kind/dto/pet-kind.type';
 import { PetKind } from '../pet-kind/pet-kind.model';
+import { UserType } from '../user/dto/user.type';
+import { User } from '../user/user.model';
+import { UserService } from '../user/user.service';
 
 /**
  * @class PetResolver
@@ -33,7 +36,8 @@ import { PetKind } from '../pet-kind/pet-kind.model';
 @Injectable()
 export class PetResolver {
   constructor(private petService: PetService,
-              private petKindService: PetKindService) {}
+              private petKindService: PetKindService,
+              private userService: UserService) {}
 
   /**
    * @description - query that return one pet record by id
@@ -109,5 +113,12 @@ export class PetResolver {
   @ResolveField(_returns => PetKindType)
   async kind(@Parent() pet): Promise<PetKind> {
     return await this.petKindService.findByPetId(pet.id);
+  }
+
+  @ResolveField(_returns => UserType)
+  async user(@Parent() pet: Pet): Promise<User> | null {
+    if (!pet.id) { return null; }
+
+    return await this.userService.findByPetId(pet.id);
   }
 }
