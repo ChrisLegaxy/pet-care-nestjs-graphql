@@ -8,10 +8,23 @@
  */
 
 /**
- * * Nest JS & Package Imports
+ * * Nest JS Module Imports
  */
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+
+/**
+ * * Node Packages Imports
+ */
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
+
+/**
+ * * External Imports
+ */
+import { PetKind } from '@/modules/pet-kind/pet-kind.model';
+
+/**
+ * * Internal Imports
+ */
 import { PetStatus } from '../pet.model';
 
 /**
@@ -37,6 +50,15 @@ export class CreatePetInput {
   @Field(_type => PetStatus, { nullable: true })
   @IsNotEmpty()
   status?: PetStatus;
+
+  /**
+   * * Relationships
+   */
+  @Field(() => String, { nullable: true })
+  @IsUUID()
+  @IsNotEmpty()
+  kindId?: string;
+  kind: PetKind;
 }
 
 /**
@@ -45,6 +67,9 @@ export class CreatePetInput {
  */
 @InputType()
 export class UpdatePetInput {
+  /**
+   * * Base
+   */
   @Field(() => String, { nullable: true })
   @IsString()
   @IsNotEmpty()
@@ -62,4 +87,13 @@ export class UpdatePetInput {
   @Field(_type => PetStatus, { nullable: true })
   @IsNotEmpty()
   status?: PetStatus;
+
+  /**
+   * * Relationships
+   */
+  @Field(() => String, { nullable: true })
+  @IsUUID()
+  @IsNotEmpty()
+  kindId: string;
+  kind: PetKind;
 }
