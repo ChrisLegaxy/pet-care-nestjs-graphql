@@ -24,6 +24,9 @@ import { Pet } from '../pet/pet.model';
  */
 @Entity()
 export class User extends Abstract {
+  /**
+   * * Base
+   */
   @Column()
   firstName: string;
 
@@ -49,6 +52,21 @@ export class User extends Abstract {
   })
   role: Role;
 
+  /**
+   * * Social Sign-In
+   */
+  @Column()
+  google: string;
+
+  @Column()
+  facebook: string;
+
+  @Column()
+  phoneNumber: string;
+
+  /**
+   * * Relationships
+   */
   @OneToMany(_type => Pet, pet => pet.user, { nullable: true })
   pets: Pet[];
 }
