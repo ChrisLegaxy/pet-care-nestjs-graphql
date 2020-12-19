@@ -10,13 +10,14 @@
 /**
  * * Node Packages Imports
  */
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany, OneToOne } from 'typeorm';
 
 /**
  * * External Imports
  */
 import { Abstract } from '@/shared/abstract.model';
 import { Gender, Role } from '@/shared/constants';
+import { Pet } from '../pet/pet.model';
 
 /**
  * @class User
@@ -47,4 +48,7 @@ export class User extends Abstract {
     default: Role.PET_OWNER
   })
   role: Role;
+
+  @OneToMany(_type => Pet, pet => pet.user, { nullable: true })
+  pets: Pet[];
 }

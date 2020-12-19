@@ -10,20 +10,15 @@
 /**
  * * Nest JS & Package Imports
  */
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 
 /**
  * * Local Imports
  */
 import { Abstract } from 'src/shared/abstract.model';
 import { PetKind } from '../pet-kind/pet-kind.model';
-
-// 'IN' meaning the pet is inside the care taking
-// 'OUT' meaning the is not inside or the owner took it back home
-export enum PetStatus {
-  IN = 'IN',
-  OUT = 'OUT'
-}
+import { User } from '../user/user.model';
+import { PetStatus } from '@/shared/constants';
 
 /**
  * @class Pet
@@ -46,6 +41,9 @@ export class Pet extends Abstract {
   })
   status: PetStatus;
 
-  @ManyToOne(_type => PetKind, { nullable: true, onDelete: 'SET NULL' })
+  @ManyToOne(_type => PetKind, petKind => petKind.pets, { nullable: true, onDelete: 'SET NULL' })
   kind: PetKind;
+
+  @ManyToOne(_type => User, user => user.pets, { onDelete: 'CASCADE' })
+  user: User;
 }
