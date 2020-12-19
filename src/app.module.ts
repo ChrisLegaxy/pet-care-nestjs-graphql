@@ -24,6 +24,7 @@ import { PetKindModule } from './modules/pet-kind/pet-kind.module';
  * * Other Imports
  */
 import { join } from 'path';
+import { UserModule } from '@/modules/user/user.module';
 
 /**
  * @module AppModule
@@ -46,7 +47,8 @@ import { join } from 'path';
       synchronize: true
     }),
     PetModule,
-    PetKindModule
+    PetKindModule,
+    UserModule
   ]
 })
 export class AppModule {}
