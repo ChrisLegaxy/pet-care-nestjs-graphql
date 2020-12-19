@@ -33,7 +33,7 @@ import { CreatePetKindInput, UpdatePetKindInput } from './dto/pet-kind.input';
 @Resolver(_of => PetKindType)
 @Injectable()
 export class PetKindResolver {
-  constructor(private petService: PetKindService) {}
+  constructor(private petKindService: PetKindService) {}
 
   /**
    * @description - query that return one petKind record by id
@@ -44,7 +44,7 @@ export class PetKindResolver {
    */
   @Query(_returns => PetKindType)
   async petKind(@Args('id', { type: () => String }) id: string): Promise<PetKind> {
-    return this.petService.findByIdOrFail(id);
+    return this.petKindService.findByIdOrFail(id);
   }
 
   /**
@@ -56,7 +56,7 @@ export class PetKindResolver {
    */
   @Query(_returns => [PetKindType])
   async petKinds(): Promise<PetKind[]> {
-    return this.petService.find();
+    return this.petKindService.find();
   }
 
   /**
@@ -71,7 +71,7 @@ export class PetKindResolver {
     /**
      * ! must cast with plainToClass because petKind input will return as [Object: null prototype]
      */
-    return await this.petService.create(plainToClass(CreatePetKindInput, petKind));
+    return await this.petKindService.create(plainToClass(CreatePetKindInput, petKind));
   }
 
   /**
@@ -89,7 +89,7 @@ export class PetKindResolver {
     /**
      * ! must cast with plainToClass because petKind input will return as [Object: null prototype]
      */
-    return await this.petService.update(id, plainToClass(UpdatePetKindInput, petKind));
+    return await this.petKindService.update(id, plainToClass(UpdatePetKindInput, petKind));
   }
 
   /**
@@ -103,6 +103,6 @@ export class PetKindResolver {
   async deletePetKind(
     @Args('id', { type: () => String }) id: string
   ): Promise<PetKind> {
-    return await this.petService.delete(id);
+    return await this.petKindService.delete(id);
   }
 }
