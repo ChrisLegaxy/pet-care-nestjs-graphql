@@ -58,7 +58,7 @@ export class CreatePetInput {
   @IsUUID()
   @IsNotEmpty()
   kindId?: string;
-  kind: PetKind;
+  kind?: PetKind;
 }
 
 /**
@@ -94,6 +94,6 @@ export class UpdatePetInput {
   @Field(() => String, { nullable: true })
   @IsUUID()
   @IsNotEmpty()
-  kindId: string;
-  kind: PetKind;
+  kindId?: string;
+  kind?: PetKind;
 }
