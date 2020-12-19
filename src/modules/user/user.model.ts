@@ -10,13 +10,18 @@
 /**
  * * Node Packages Imports
  */
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 /**
  * * External Imports
  */
-import { Abstract } from 'src/shared/abstract.model';
+import { Abstract } from '@/shared/abstract.model';
 import { Gender } from '@/shared/constants';
+
+/**
+ * * Application Module Imports
+ */
+import { Owner } from '@/modules/owner/owner.model';
 
 /**
  * @class User
@@ -40,4 +45,7 @@ export class User extends Abstract {
     enum: Gender
   })
   gender: Gender;
+
+  @OneToOne(_type => Owner, owner => owner.user)
+  owner: Owner;
 }
