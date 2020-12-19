@@ -15,14 +15,14 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 /**
  * * Node Packages Imports
  */
-import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 
 /**
  * * External Imports
  */
 import { PetKind } from '@/modules/pet-kind/pet-kind.model';
 import { User } from '@/modules/user/user.model';
-import { PetStatus } from '@/shared/constants';
+import { Gender, PetStatus } from '@/shared/constants';
 
 /**
  * @class CreatePetInput
@@ -43,11 +43,17 @@ export class CreatePetInput {
   @IsNotEmpty()
   age: number;
 
+  @Field(_type => Gender)
+  @IsEnum(Gender)
+  @IsNotEmpty()
+  gender: Gender;
+
   @Field(() => String, { nullable: true })
   @IsNotEmpty()
   picture?: string;
 
   @Field(_type => PetStatus, { nullable: true })
+  @IsEnum(PetStatus)
   @IsNotEmpty()
   status?: PetStatus;
 
@@ -71,7 +77,7 @@ export class CreatePetInput {
   @IsUUID()
   @IsNotEmpty()
   userId: string;
-  User: User;
+  user: User;
 }
 
 /**
@@ -93,11 +99,17 @@ export class UpdatePetInput {
   @IsNotEmpty()
   age?: number;
 
+  @Field(_type => Gender, { nullable: true })
+  @IsEnum(Gender)
+  @IsNotEmpty()
+  gender?: Gender;
+
   @Field(() => String, { nullable: true })
   @IsNotEmpty()
   picture?: string;
 
   @Field(_type => PetStatus, { nullable: true })
+  @IsEnum(PetStatus)
   @IsNotEmpty()
   status?: PetStatus;
 
