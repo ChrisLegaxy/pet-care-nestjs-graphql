@@ -10,15 +10,62 @@
 /**
  * * Nest JS Module Imports
  */
-import { ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 /**
  * * External Imports
  */
 import { AbstractType } from '@/shared/abstract.type';
+import { User } from '../user.model';
+import { Gender, Role } from '@/shared/constants';
+import { PetType } from '@/modules/pet/dto/pet.type';
+
+registerEnumType(Gender, {
+  name: 'Gender'
+});
+
+registerEnumType(Role, {
+  name: 'Role'
+});
 
 /**
  * @class UserType
  */
 @ObjectType('User')
-export class UserType extends AbstractType {}
+export class UserType extends AbstractType {
+  /**
+   * * Base
+   */
+  @Field(_type => String)
+  firstName: string;
+
+  @Field(_type => String)
+  lastName: string;
+
+  @Field(_type => String)
+  email: string;
+
+  @Field(_type => Gender)
+  gender: Gender;
+
+  @Field(_type => Role)
+  role: Role;
+
+  @Field(_type => String, { nullable: true })
+  phoneNumber: string;
+
+  /**
+   * * Social Sign In
+   */
+  @Field(_type => String, { nullable: true })
+  google: string;
+
+  @Field(_type => String, { nullable: true })
+  facebook: string;
+
+  /**
+   * * Relationships
+   */
+  @Field(_type => [PetType], { nullable: true })
+  pets: PetType[];
+}
