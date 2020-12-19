@@ -63,7 +63,22 @@ export class CreateUserInput {
   phoneNumber?: string;
 }
 
+/**
+ * @class SocialUserInput
+ * @description - Purely for creating user via social sign in
+ */
 @InputType()
+export class SocialUserInput {
+  /**
+   * * Social Sign In
+   */
+  @Field(_type => String, { nullable: true })
+  google?: string;
+
+  @Field(_type => String, { nullable: true })
+  facebook?: string;
+}
+
 /**
  * @class UpdateUserInput
  */
