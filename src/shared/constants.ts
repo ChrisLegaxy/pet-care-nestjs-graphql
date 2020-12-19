@@ -7,6 +7,13 @@
  * @since - 17 Dec 2020
  */
 
+// 'IN' meaning the pet is inside the care taking
+// 'OUT' meaning the is not inside or the owner took it back home
+export enum PetStatus {
+  IN = 'IN',
+  OUT = 'OUT'
+}
+
 export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE'
