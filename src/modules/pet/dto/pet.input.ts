@@ -21,11 +21,8 @@ import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
  * * External Imports
  */
 import { PetKind } from '@/modules/pet-kind/pet-kind.model';
-
-/**
- * * Internal Imports
- */
-import { PetStatus } from '../pet.model';
+import { User } from '@/modules/user/user.model';
+import { PetStatus } from '@/shared/constants';
 
 /**
  * @class CreatePetInput
@@ -33,6 +30,9 @@ import { PetStatus } from '../pet.model';
  */
 @InputType()
 export class CreatePetInput {
+  /**
+   * * Base
+   */
   @Field(() => String)
   @IsString()
   @IsNotEmpty()
@@ -54,11 +54,24 @@ export class CreatePetInput {
   /**
    * * Relationships
    */
+
+  /**
+   * @description - Kind of animal of the pet
+   */
   @Field(() => String, { nullable: true })
   @IsUUID()
   @IsNotEmpty()
   kindId?: string;
   kind?: PetKind;
+
+  /**
+   * @description - Owner of the pet
+   */
+  @Field(() => String)
+  @IsUUID()
+  @IsNotEmpty()
+  userId: string;
+  User: User;
 }
 
 /**
@@ -90,6 +103,10 @@ export class UpdatePetInput {
 
   /**
    * * Relationships
+   */
+
+  /**
+   * @description - Kind of animal of the pet
    */
   @Field(() => String, { nullable: true })
   @IsUUID()
