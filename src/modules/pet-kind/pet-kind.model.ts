@@ -27,6 +27,6 @@ export class PetKind extends Abstract {
   @Column()
   name: string;
 
-  @OneToMany(_type => Pet, pet => pet.kind, { onDelete: 'SET NULL' })
+  @OneToMany(_type => Pet, pet => pet.kind, { onDelete: 'CASCADE' })
   pets: Pet[];
 }
