@@ -46,6 +46,6 @@ export class Pet extends Abstract {
   })
   status: PetStatus;
 
-  @ManyToOne(_type => PetKind, { nullable: true })
+  @ManyToOne(_type => PetKind, { nullable: true, onDelete: 'SET NULL' })
   kind: PetKind;
 }
