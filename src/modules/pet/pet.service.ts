@@ -23,6 +23,7 @@ import { Pet } from './pet.model';
 import { PetRepository } from './pet.repository';
 import { CreatePetInput, UpdatePetInput } from './dto/pet.input';
 import { PetKindService } from '../pet-kind/pet-kind.service';
+import { UserService } from '../user/user.service';
 
 /**
  * @class PetService
@@ -30,7 +31,8 @@ import { PetKindService } from '../pet-kind/pet-kind.service';
 @Injectable()
 export class PetService {
   constructor(private petRepository: PetRepository,
-              private petKindService: PetKindService) {}
+              private petKindService: PetKindService,
+              private userService: UserService) {}
 
   public async find(): Promise<Pet[]> {
     return await this.petRepository.find();
@@ -44,9 +46,19 @@ export class PetService {
     }
   }
 
+  public async findByUserId(userId: string): Promise<Pet[]> {
+    const user = await this.userService.findByIdOrFail(userId);
+
+    return await this.petRepository.find({ user });
+  }
+
   public async create(createInput: CreatePetInput): Promise<Pet> {
     if (createInput.kindId) {
       createInput.kind = await this.petKindService.findByIdOrFail(createInput.kindId);
+    }
+
+    if (createInput.userId) {
+      createInput.user = await this.userService.findByIdOrFail(createInput.userId);
     }
 
     try {
@@ -76,8 +88,10 @@ export class PetService {
   }
 
   public async delete(id: string): Promise<Pet> {
+    const toBeDeleted = await this.findByIdOrFail(id);
+
     try {
-      return await this.petRepository.remove(await this.findByIdOrFail(id));
+      return await this.petRepository.remove(toBeDeleted);
     } catch (error) {
       throw new UnprocessableEntityException(error.message);
     }
