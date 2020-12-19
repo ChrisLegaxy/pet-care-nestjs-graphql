@@ -17,36 +17,40 @@ import {
 } from '@nestjs/common';
 
 /**
- * * Pet & Local Imports
+ * * Internal Imports
  */
 import { Pet } from './pet.model';
 import { PetRepository } from './pet.repository';
-
 import { CreatePetInput, UpdatePetInput } from './dto/pet.input';
-import { plainToClass } from 'class-transformer';
+import { PetKindService } from '../pet-kind/pet-kind.service';
 
 /**
  * @class PetService
  */
 @Injectable()
 export class PetService {
-  constructor(private catRepository: PetRepository) {}
+  constructor(private petRepository: PetRepository,
+              private petKindService: PetKindService) {}
 
   public async find(): Promise<Pet[]> {
-    return await this.catRepository.find();
+    return await this.petRepository.find();
   }
 
   public async findByIdOrFail(id: string): Promise<Pet> {
     try {
-      return await this.catRepository.findOneOrFail(id);
+      return await this.petRepository.findOneOrFail(id);
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
 
-  public async create(createPetInput: CreatePetInput): Promise<Pet> {
+  public async create(createInput: CreatePetInput): Promise<Pet> {
+    if (createInput.kindId) {
+      createInput.kind = await this.petKindService.findByIdOrFail(createInput.kindId);
+    }
+
     try {
-      return await this.catRepository.createAndSave(createPetInput);
+      return await this.petRepository.createAndSave(createInput);
     } catch (error) {
       throw new UnprocessableEntityException(error.message);
     }
@@ -54,14 +58,16 @@ export class PetService {
 
   public async update(
     id: string,
-    updateBodyDto: UpdatePetInput
+    updateInput: UpdatePetInput
   ): Promise<Pet> {
     await this.findByIdOrFail(id);
 
-    const myPet = plainToClass(UpdatePetInput, updateBodyDto);
-    console.log(myPet);
+    if (updateInput.kindId) {
+      updateInput.kind = await this.petKindService.findByIdOrFail(updateInput.kindId);
+    }
+
     try {
-      await this.catRepository.update(id, myPet);
+      await this.petRepository.update(id, updateInput);
 
       return await this.findByIdOrFail(id);
     } catch (error) {
@@ -71,9 +77,7 @@ export class PetService {
 
   public async delete(id: string): Promise<Pet> {
     try {
-      const yo = await this.catRepository.remove(await this.findByIdOrFail(id));
-      console.log(yo);
-      return yo;
+      return await this.petRepository.remove(await this.findByIdOrFail(id));
     } catch (error) {
       throw new UnprocessableEntityException(error.message);
     }
