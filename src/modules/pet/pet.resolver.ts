@@ -11,25 +11,29 @@
  * * Nest JS * Package Imports
  */
 import { Injectable } from '@nestjs/common';
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 import { plainToClass } from 'class-transformer';
 
 /**
- * * Pet & Local Imports
+ * * Internal Imports
  */
 import { Pet } from './pet.model';
 import { PetService } from './pet.service';
 
 import { PetType } from './dto/pet.type';
 import { CreatePetInput, UpdatePetInput } from './dto/pet.input';
+import { PetKindService } from '../pet-kind/pet-kind.service';
+import { PetKindType } from '../pet-kind/dto/pet-kind.type';
+import { PetKind } from '../pet-kind/pet-kind.model';
 
 /**
  * @class PetResolver
  */
-@Resolver('Pet')
+@Resolver(_of => PetType)
 @Injectable()
 export class PetResolver {
-  constructor(private petService: PetService) {}
+  constructor(private petService: PetService,
+              private petKindService: PetKindService) {}
 
   /**
    * @description - query that return one pet record by id
@@ -46,7 +50,7 @@ export class PetResolver {
   /**
    * @description - query that return all pet records
    *
-   * @function pet
+   * @function pets
    * @param none
    * @returns Promise<Pet[]>
    */
@@ -100,5 +104,10 @@ export class PetResolver {
     @Args('id', { type: () => String }) id: string
   ): Promise<Pet> {
     return await this.petService.delete(id);
+  }
+
+  @ResolveField(_returns => PetKindType)
+  async kind(@Parent() pet): Promise<PetKind> {
+    return await this.petKindService.findByPetId(pet.id);
   }
 }
