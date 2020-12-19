@@ -10,7 +10,7 @@
 /**
  * * Nest JS Module Imports
  */
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 
 /**
  * * Node Packages Imports
@@ -18,16 +18,23 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 /**
+ * * Application Module Imports
+ */
+import { PetModule } from '../pet/pet.module';
+
+/**
  * * Internal Imports
  */
 import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
+import { UserResolver } from './user.resolver';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserRepository])
+    TypeOrmModule.forFeature([UserRepository]),
+    forwardRef(() => PetModule)
   ],
-  providers: [UserService],
+  providers: [UserService, UserResolver],
   exports: [UserService]
 })
 export class UserModule {}
