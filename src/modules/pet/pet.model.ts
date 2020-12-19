@@ -18,7 +18,7 @@ import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 import { Abstract } from 'src/shared/abstract.model';
 import { PetKind } from '../pet-kind/pet-kind.model';
 import { User } from '../user/user.model';
-import { PetStatus } from '@/shared/constants';
+import { Gender, PetStatus } from '@/shared/constants';
 
 /**
  * @class Pet
@@ -30,6 +30,12 @@ export class Pet extends Abstract {
 
   @Column()
   age: number;
+
+  @Column({
+    type: 'enum',
+    enum: Gender
+  })
+  gender: Gender;
 
   @Column({ nullable: true })
   picture: string;
