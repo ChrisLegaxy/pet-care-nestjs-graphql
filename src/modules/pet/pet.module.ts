@@ -10,7 +10,7 @@
 /**
  * * Nest Imports
  */
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 /**
@@ -20,8 +20,8 @@ import { PetController } from './pet.controller';
 import { PetService } from './pet.service';
 import { PetRepository } from './pet.repository';
 import { PetResolver } from './pet.resolver';
-import { PetKindService } from '../pet-kind/pet-kind.service';
 import { PetKindModule } from '../pet-kind/pet-kind.module';
+import { UserModule } from '../user/user.module';
 
 /**
  * @module Pet
@@ -29,7 +29,8 @@ import { PetKindModule } from '../pet-kind/pet-kind.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([PetRepository]),
-    PetKindModule
+    PetKindModule,
+    forwardRef(() => UserModule)
   ],
   providers: [PetService, PetResolver],
   controllers: [PetController],
