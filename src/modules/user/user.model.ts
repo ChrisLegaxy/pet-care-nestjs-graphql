@@ -16,12 +16,7 @@ import { Column, Entity, OneToOne } from 'typeorm';
  * * External Imports
  */
 import { Abstract } from '@/shared/abstract.model';
-import { Gender } from '@/shared/constants';
-
-/**
- * * Application Module Imports
- */
-import { Owner } from '@/modules/owner/owner.model';
+import { Gender, Role } from '@/shared/constants';
 
 /**
  * @class User
@@ -46,6 +41,10 @@ export class User extends Abstract {
   })
   gender: Gender;
 
-  @OneToOne(_type => Owner, owner => owner.user)
-  owner: Owner;
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.PET_OWNER
+  })
+  role: Role;
 }
