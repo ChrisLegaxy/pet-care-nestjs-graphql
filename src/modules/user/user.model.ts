@@ -52,21 +52,21 @@ export class User extends Abstract {
   })
   role: Role;
 
+  @Column({ nullable: true })
+  phoneNumber: string;
+
   /**
    * * Social Sign-In
    */
-  @Column()
+  @Column({ nullable: true })
   google: string;
 
-  @Column()
+  @Column({ nullable: true })
   facebook: string;
-
-  @Column()
-  phoneNumber: string;
 
   /**
    * * Relationships
    */
-  @OneToMany(_type => Pet, pet => pet.user, { nullable: true })
+  @OneToMany(_type => Pet, pet => pet.user, { nullable: true, onDelete: 'CASCADE' })
   pets: Pet[];
 }
