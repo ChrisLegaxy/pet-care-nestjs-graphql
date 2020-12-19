@@ -33,7 +33,7 @@ import { join } from 'path';
     GraphQLModule.forRoot({
       debug: true,
       playground: true,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql')
+      autoSchemaFile: join(process.cwd(), 'src/generated/schema.gql')
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
