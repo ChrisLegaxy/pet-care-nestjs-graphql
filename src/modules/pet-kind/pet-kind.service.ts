@@ -35,6 +35,14 @@ export class PetKindService {
     return await this.petKindRepository.find();
   }
 
+  public async findByIdOrFail(id: string): Promise<PetKind> {
+    try {
+      return await this.petKindRepository.findOneOrFail(id);
+    } catch (error) {
+      throw new NotFoundException(error.message);
+    }
+  }
+
   public async findByPetId(petId: string): Promise<PetKind> {
     const queryBuilder = this.petKindRepository.createQueryBuilder('petKind');
 
@@ -44,14 +52,6 @@ export class PetKindService {
     .where('pet.id = :petId', { petId });
 
     return await queryBuilder.getOne();
-  }
-
-  public async findByIdOrFail(id: string): Promise<PetKind> {
-    try {
-      return await this.petKindRepository.findOneOrFail({  }, { });
-    } catch (error) {
-      throw new NotFoundException(error.message);
-    }
   }
 
   public async create(createInput: CreatePetKindInput): Promise<PetKind> {
@@ -78,8 +78,10 @@ export class PetKindService {
   }
 
   public async delete(id: string): Promise<PetKind> {
+    const toBeDeleted = await this.findByIdOrFail(id);
+
     try {
-      return await this.petKindRepository.remove(await this.findByIdOrFail(id));
+      return await this.petKindRepository.remove(toBeDeleted);
     } catch (error) {
       throw new UnprocessableEntityException(error.message);
     }
