@@ -30,7 +30,7 @@ import { CreatePetKindInput, UpdatePetKindInput } from './dto/pet-kind.input';
 /**
  * @class PetKindResolver
  */
-@Resolver('PetKind')
+@Resolver(_of => PetKindType)
 @Injectable()
 export class PetKindResolver {
   constructor(private petService: PetKindService) {}
