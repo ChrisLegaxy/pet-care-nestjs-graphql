@@ -21,4 +21,15 @@ import { PetKind } from './pet-kind.model';
  * @class PetKindRepository
  */
 @EntityRepository(PetKind)
-export class PetKindRepository extends Repository<PetKind> {}
+export class PetKindRepository extends Repository<PetKind> {
+  /**
+   * @description - first create the instance then save to the database
+   *
+   * @function createAndSave
+   * @param petKind
+   * @returns Promise<Pet>
+   */
+  async createAndSave(petKind: Partial<PetKind>): Promise<PetKind> {
+    return await this.save(this.create(petKind));
+  }
+}
