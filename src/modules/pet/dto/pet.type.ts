@@ -17,7 +17,9 @@ import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
  */
 import { AbstractType } from '@/shared/abstract.type';
 import { PetKindType } from '@/modules/pet-kind/dto/pet-kind.type';
-import { PetStatus } from '@/shared/constants';
+import { Gender, PetStatus } from '@/shared/constants';
+import { UserType } from '@/modules/user/dto/user.type';
+import { User } from '@/modules/user/user.model';
 
 /**
  * * Enum Registration
@@ -38,6 +40,9 @@ export class PetType extends AbstractType {
   @Field(_type => Int, { description: 'Age of the pet' })
   age: number;
 
+  @Field(_type => Gender, { description: 'Gender of the pet'})
+  gender: Gender;
+
   @Field(_type => String, { nullable: true, description: 'Picture of the pet' })
   picture: string;
 
@@ -46,4 +51,7 @@ export class PetType extends AbstractType {
 
   @Field(_type => PetKindType, { nullable: true, description: 'Animal kind of the pet' })
   kind: PetKindType;
+
+  @Field(_type => UserType, { nullable: true })
+  user: UserType;
 }
