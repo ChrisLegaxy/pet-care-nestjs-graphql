@@ -13,7 +13,7 @@
 import { InputType } from '@nestjs/graphql';
 
 @InputType()
-export class UserCreateInput {}
+export class CreateUserInput {}
 
 @InputType()
-export class UserUpdateInput {}
+export class UpdateUserInput {}
