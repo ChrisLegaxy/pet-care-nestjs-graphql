@@ -31,6 +31,9 @@ import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 import { UserResolver } from './user.resolver';
 
+/**
+ * @module User
+ */
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserRepository]),
