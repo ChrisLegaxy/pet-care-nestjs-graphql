@@ -8,16 +8,20 @@
  */
 
 /**
- * * Node Packages Imports
+ * * Node Package Imports
  */
-import { Column, Entity, ManyToMany, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 /**
- * * External Imports
+ * * Nest Module Imports
+ */
+import { Pet } from '@/modules/pet/pet.model';
+
+/**
+ * * Shared Imports
  */
 import { Abstract } from '@/shared/abstract.model';
 import { Gender, Role } from '@/shared/constants';
-import { Pet } from '../pet/pet.model';
 
 /**
  * @class User
