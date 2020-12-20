@@ -1,4 +1,9 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
+import { UserModule } from '../user/user.module';
 
-@Module({})
+@Module({
+  imports: [
+    forwardRef(() => UserModule)
+  ]
+})
 export class AuthModule {}
