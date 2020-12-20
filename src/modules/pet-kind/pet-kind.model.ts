@@ -23,7 +23,6 @@ import { Pet } from '@/modules/pet/pet.model';
  */
 import { Abstract } from '@/shared/abstract.model';
 
-
 /**
  * @class PetKind
  */
