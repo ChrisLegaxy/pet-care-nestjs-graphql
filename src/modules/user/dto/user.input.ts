@@ -8,17 +8,17 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { Field, InputType } from '@nestjs/graphql';
 
 /**
- * * Node Packages Imports
+ * * Node Package Imports
  */
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 /**
- * * External Imports
+ * * Shared Imports
  */
 import { Gender, Role } from '@/shared/constants';
 
