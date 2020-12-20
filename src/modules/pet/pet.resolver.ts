@@ -8,11 +8,26 @@
  */
 
 /**
- * * Nest JS * Package Imports
+ * * Nest Package Imports
  */
 import { Injectable } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
+
+/**
+ * * Node Package Imports
+ */
 import { plainToClass } from 'class-transformer';
+
+/**
+ * * Nest Module Imports
+ */
+import { PetKind } from '@/modules/pet-kind/pet-kind.model';
+import { PetKindType } from '@/modules/pet-kind/dto/pet-kind.type';
+import { PetKindService } from '@/modules/pet-kind/pet-kind.service';
+
+import { User } from '@/modules/user/user.model';
+import { UserType } from '@/modules/user/dto/user.type';
+import { UserService } from '@/modules/user/user.service';
 
 /**
  * * Internal Imports
@@ -22,12 +37,6 @@ import { PetService } from './pet.service';
 
 import { PetType } from './dto/pet.type';
 import { CreatePetInput, UpdatePetInput } from './dto/pet.input';
-import { PetKindService } from '../pet-kind/pet-kind.service';
-import { PetKindType } from '../pet-kind/dto/pet-kind.type';
-import { PetKind } from '../pet-kind/pet-kind.model';
-import { UserType } from '../user/dto/user.type';
-import { User } from '../user/user.model';
-import { UserService } from '../user/user.service';
 
 /**
  * @class PetResolver
@@ -110,11 +119,27 @@ export class PetResolver {
     return await this.petService.delete(id);
   }
 
+  /**
+   * @description - resolve field of kind (PetKind)
+   *
+   * @function kind
+   * @param pet - pet model
+   * @returns Promise<PetKind> / null
+   */
   @ResolveField(_returns => PetKindType)
-  async kind(@Parent() pet): Promise<PetKind> {
+  async kind(@Parent() pet: Pet): Promise<PetKind> | null {
+    if (!pet.id) { return null; }
+
     return await this.petKindService.findByPetId(pet.id);
   }
 
+  /**
+   * @description - resolve field of user
+   *
+   * @function user
+   * @param pet - pet model
+   * @returns Promise<User> / null
+   */
   @ResolveField(_returns => UserType)
   async user(@Parent() pet: Pet): Promise<User> | null {
     if (!pet.id) { return null; }
