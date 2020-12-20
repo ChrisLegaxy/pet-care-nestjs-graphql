@@ -8,15 +8,22 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Module Imports
  */
 import { Injectable } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 
 /**
- * * Node Packages Imports
+ * * Node Package Imports
  */
 import { plainToClass } from 'class-transformer';
+
+/**
+ * * Nest Module Imports
+ */
+import { Pet } from '@/modules/pet/pet.model';
+import { PetType } from '@/modules/pet/dto/pet.type';
+import { PetService } from '@/modules/pet/pet.service';
 
 /**
  * * Internal Imports
@@ -26,9 +33,6 @@ import { UserService } from './user.service';
 
 import { UserType } from './dto/user.type';
 import { CreateUserInput, UpdateUserInput } from './dto/user.input';
-import { PetType } from '../pet/dto/pet.type';
-import { PetService } from '../pet/pet.service';
-import { Pet } from '../pet/pet.model';
 
 /**
  * @class PetKindResolver
