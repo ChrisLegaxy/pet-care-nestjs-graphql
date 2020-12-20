@@ -8,7 +8,7 @@
  */
 
 /**
- * * Nest JS & Package Imports
+ * * Nest Package Imports
  */
 import {
   Injectable,
@@ -17,13 +17,18 @@ import {
 } from '@nestjs/common';
 
 /**
+ * * Nest Module Imports
+ */
+import { PetKindService } from '../pet-kind/pet-kind.service';
+import { UserService } from '../user/user.service';
+
+/**
  * * Internal Imports
  */
 import { Pet } from './pet.model';
 import { PetRepository } from './pet.repository';
+
 import { CreatePetInput, UpdatePetInput } from './dto/pet.input';
-import { PetKindService } from '../pet-kind/pet-kind.service';
-import { UserService } from '../user/user.service';
 
 /**
  * @class PetService
