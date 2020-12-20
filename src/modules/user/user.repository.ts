@@ -8,7 +8,7 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Node Package Imports
  */
 import { EntityRepository, Repository } from 'typeorm';
 
