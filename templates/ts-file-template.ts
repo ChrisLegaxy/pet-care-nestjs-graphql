@@ -8,15 +8,19 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 
 /**
- * * Node Packages Imports
+ * * Node Package Imports
  */
 
 /**
- * * External Imports
+ * * Nest Module Imports
+ */
+
+/**
+ * * Shared Imports
  */
 
 /**
