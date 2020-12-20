@@ -8,14 +8,14 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { Field, InputType } from '@nestjs/graphql';
 
 /**
- * * Packages Imports
+ * * Node Package Imports
  */
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 /**
  * @class CreatePetKindInput
