@@ -8,12 +8,12 @@
  */
 
 /**
- * * Package Imports
+ * * Node Package Imports
  */
 import { EntityRepository, Repository } from 'typeorm';
 
 /**
- * * Pet & Local Imports
+ * * Internal Imports
  */
 import { Pet } from './pet.model';
 
