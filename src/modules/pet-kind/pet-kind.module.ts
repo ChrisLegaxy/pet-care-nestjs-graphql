@@ -8,7 +8,7 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -17,8 +17,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
  * * Internal Imports
  */
 import { PetKindRepository } from './pet-kind.repository';
-import { PetKindResolver } from './pet-kind.resolver';
 import { PetKindService } from './pet-kind.service';
+import { PetKindResolver } from './pet-kind.resolver';
 
 /**
  * @module PetKind
