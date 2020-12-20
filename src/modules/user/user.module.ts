@@ -8,18 +8,20 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { forwardRef, Module } from '@nestjs/common';
 
 /**
- * * Node Packages Imports
+ * * Node Package Imports
  */
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 /**
- * * Application Module Imports
+ * * Nest Module Imports
  */
+import { AuthModule } from '../auth/auth.module';
+
 import { PetModule } from '../pet/pet.module';
 
 /**
@@ -28,7 +30,6 @@ import { PetModule } from '../pet/pet.module';
 import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 import { UserResolver } from './user.resolver';
-import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
