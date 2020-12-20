@@ -8,16 +8,20 @@
  */
 
 /**
- * * Nest JS & Package Imports
+ * * Node Package Imports
  */
-import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 /**
- * * Local Imports
+ * * Nest Module Imports
  */
-import { Abstract } from 'src/shared/abstract.model';
-import { PetKind } from '../pet-kind/pet-kind.model';
-import { User } from '../user/user.model';
+import { PetKind } from '@/modules/pet-kind/pet-kind.model';
+import { User } from '@/modules/user/user.model';
+
+/**
+ * * Shared Imports
+ */
+import { Abstract } from '@/shared/abstract.model';
 import { Gender, PetStatus } from '@/shared/constants';
 
 /**
@@ -25,6 +29,9 @@ import { Gender, PetStatus } from '@/shared/constants';
  */
 @Entity()
 export class Pet extends Abstract {
+  /**
+   * * Base
+   */
   @Column()
   name: string;
 
@@ -47,6 +54,9 @@ export class Pet extends Abstract {
   })
   status: PetStatus;
 
+  /**
+   * *Relationships
+   */
   @ManyToOne(_type => PetKind, petKind => petKind.pets, { nullable: true, onDelete: 'SET NULL' })
   kind: PetKind;
 
