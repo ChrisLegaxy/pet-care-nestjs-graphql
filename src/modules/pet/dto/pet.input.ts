@@ -8,20 +8,24 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { Field, InputType, Int } from '@nestjs/graphql';
 
 /**
- * * Node Packages Imports
+ * * Node Package Imports
  */
 import { IsEnum, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 
 /**
- * * External Imports
+ * * Node Module Imports
  */
 import { PetKind } from '@/modules/pet-kind/pet-kind.model';
 import { User } from '@/modules/user/user.model';
+
+/**
+ * * Shared Imports
+ */
 import { Gender, PetStatus } from '@/shared/constants';
 
 /**
