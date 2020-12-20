@@ -8,13 +8,13 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { Injectable } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 
 /**
- * * Node Packages Imports
+ * * Node Package Imports
  */
 import { plainToClass } from 'class-transformer';
 
