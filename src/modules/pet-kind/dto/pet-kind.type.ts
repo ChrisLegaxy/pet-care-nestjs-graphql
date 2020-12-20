@@ -8,12 +8,12 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { Field, ObjectType } from '@nestjs/graphql';
 
 /**
- * * External Imports
+ * * Shared Imports
  */
 import { AbstractType } from '@/shared/abstract.type';
 
@@ -22,6 +22,9 @@ import { AbstractType } from '@/shared/abstract.type';
  */
 @ObjectType('PetKind')
 export class PetKindType extends AbstractType {
+  /**
+   * * Base
+   */
   @Field({ description: 'Animal kind of Pet' })
   name: string;
 }
