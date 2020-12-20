@@ -8,17 +8,13 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { forwardRef, Module } from '@nestjs/common';
-
-/**
- * * Node Packages Imports
- */
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 /**
- * * Application Module Imports
+ * * Nest Module Imports
  */
 import { PetKindModule } from '@/modules/pet-kind/pet-kind.module';
 import { UserModule } from '@/modules/user/user.module';
