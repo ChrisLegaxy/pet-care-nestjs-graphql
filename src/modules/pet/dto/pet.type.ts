@@ -8,18 +8,22 @@
  */
 
 /**
- * * Nest JS & Package Imports
+ * * Nest Package Imports
  */
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 /**
- * * Pet & Local Imports
+ * * Nest Module Imports
+ */
+import { PetKindType } from '@/modules/pet-kind/dto/pet-kind.type';
+
+import { UserType } from '@/modules/user/dto/user.type';
+
+/**
+ * * Shared Imports
  */
 import { AbstractType } from '@/shared/abstract.type';
-import { PetKindType } from '@/modules/pet-kind/dto/pet-kind.type';
 import { Gender, PetStatus } from '@/shared/constants';
-import { UserType } from '@/modules/user/dto/user.type';
-import { User } from '@/modules/user/user.model';
 
 /**
  * * Enum Registration
@@ -34,6 +38,9 @@ registerEnumType(PetStatus, {
  */
 @ObjectType('Pet')
 export class PetType extends AbstractType {
+  /**
+   * * Base
+   */
   @Field(_type => String, { description: 'Name of the pet' })
   name: string;
 
@@ -49,6 +56,9 @@ export class PetType extends AbstractType {
   @Field(_type => PetStatus, { description: 'Status of the pet'})
   status: PetStatus;
 
+  /**
+   * * Relationships
+   */
   @Field(_type => PetKindType, { nullable: true, description: 'Animal kind of the pet' })
   kind: PetKindType;
 
