@@ -8,7 +8,7 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { ArgsType } from '@nestjs/graphql';
 
