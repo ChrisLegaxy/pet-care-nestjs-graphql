@@ -39,10 +39,24 @@ export class PetService {
               private petKindService: PetKindService,
               private userService: UserService) {}
 
+  /**
+   * @description - find all
+   *
+   * @function find
+   * @param
+   * @returns - Promise<Pet[]>
+   */
   public async find(): Promise<Pet[]> {
     return await this.petRepository.find();
   }
 
+  /**
+   * @description - find one record by id or throw not found exception
+   *
+   * @function findByIdOrFail
+   * @param { string } id - uuid
+   * @returns - Promise<Pet>
+   */
   public async findByIdOrFail(id: string): Promise<Pet> {
     try {
       return await this.petRepository.findOneOrFail(id);
@@ -51,12 +65,26 @@ export class PetService {
     }
   }
 
+  /**
+   * @description - find all record by user id
+   *
+   * @function findByUserIdOrFail
+   * @param { string } userId - uuid
+   * @returns - Promise<Pet[]>
+   */
   public async findByUserId(userId: string): Promise<Pet[]> {
     const user = await this.userService.findByIdOrFail(userId);
 
     return await this.petRepository.find({ user });
   }
 
+  /**
+   * @description - create one record
+   *
+   * @function create
+   * @param { CreatePetInput } createInput - input type of GraphQL
+   * @returns - Promise<Pet>
+   */
   public async create(createInput: CreatePetInput): Promise<Pet> {
     if (createInput.kindId) {
       createInput.kind = await this.petKindService.findByIdOrFail(createInput.kindId);
@@ -73,6 +101,13 @@ export class PetService {
     }
   }
 
+  /**
+   * @description - update one record
+   *
+   * @function create
+   * @param { UpdatePetInput } updateInput - input type of GraphQL
+   * @returns - Promise<Pet>
+   */
   public async update(
     id: string,
     updateInput: UpdatePetInput
@@ -92,6 +127,13 @@ export class PetService {
     }
   }
 
+  /**
+   * @description - delete one record
+   *
+   * @function delete
+   * @param { string } id - uuid
+   * @returns - Promise<Pet>
+   */
   public async delete(id: string): Promise<Pet> {
     const toBeDeleted = await this.findByIdOrFail(id);
 
