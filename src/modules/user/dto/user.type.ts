@@ -8,18 +8,24 @@
  */
 
 /**
- * * Nest JS Module Imports
+ * * Nest Package Imports
  */
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 /**
- * * External Imports
+ * * Nest Module Imports
  */
-import { AbstractType } from '@/shared/abstract.type';
-import { User } from '../user.model';
-import { Gender, Role } from '@/shared/constants';
 import { PetType } from '@/modules/pet/dto/pet.type';
 
+/**
+ * * Shared Imports
+ */
+import { AbstractType } from '@/shared/abstract.type';
+import { Gender, Role } from '@/shared/constants';
+
+/**
+ * * Enum Registration
+ */
 registerEnumType(Gender, {
   name: 'Gender'
 });
