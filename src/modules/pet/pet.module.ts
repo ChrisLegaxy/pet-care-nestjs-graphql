@@ -8,20 +8,27 @@
  */
 
 /**
- * * Nest Imports
+ * * Nest JS Module Imports
  */
 import { forwardRef, Module } from '@nestjs/common';
+
+/**
+ * * Node Packages Imports
+ */
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 /**
- * * Pet Imports
+ * * Application Module Imports
  */
-import { PetController } from './pet.controller';
-import { PetService } from './pet.service';
+import { PetKindModule } from '@/modules/pet-kind/pet-kind.module';
+import { UserModule } from '@/modules/user/user.module';
+
+/**
+ * * Internal Imports
+ */
 import { PetRepository } from './pet.repository';
+import { PetService } from './pet.service';
 import { PetResolver } from './pet.resolver';
-import { PetKindModule } from '../pet-kind/pet-kind.module';
-import { UserModule } from '../user/user.module';
 
 /**
  * @module Pet
@@ -33,7 +40,6 @@ import { UserModule } from '../user/user.module';
     forwardRef(() => UserModule)
   ],
   providers: [PetService, PetResolver],
-  controllers: [PetController],
   exports: [PetService]
 })
 export class PetModule {}
