@@ -9,24 +9,35 @@
  */
 
 /**
- * * Other Node Packages Imports
+ * * Node Package Imports
  */
 import { Column, Entity, OneToMany } from 'typeorm';
 
 /**
- * * External Imports
+ * * Nest Module Imports
  */
-import { Abstract } from 'src/shared/abstract.model';
-import { Pet } from '../pet/pet.model';
+import { Pet } from '@/modules/pet/pet.model';
+
+/**
+ * * Shared Imports
+ */
+import { Abstract } from '@/shared/abstract.model';
+
 
 /**
  * @class PetKind
  */
 @Entity()
 export class PetKind extends Abstract {
+  /**
+   * * Base
+   */
   @Column()
   name: string;
 
+  /**
+   * * Relationships
+   */
   @OneToMany(_type => Pet, pet => pet.kind, { onDelete: 'CASCADE' })
   pets: Pet[];
 }
