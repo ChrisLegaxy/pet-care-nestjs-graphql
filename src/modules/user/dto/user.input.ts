@@ -15,7 +15,7 @@ import { Field, InputType } from '@nestjs/graphql';
 /**
  * * Node Packages Imports
  */
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 /**
  * * External Imports
@@ -57,9 +57,14 @@ export class CreateUserInput {
   gender: Gender;
 
   @Field(_type => Role, { nullable: true } )
+  @IsOptional()
+  @IsEnum(Role)
+  @IsNotEmpty()
   role?: Role;
 
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsNotEmpty()
   phoneNumber?: string;
 }
 
@@ -73,8 +78,14 @@ export class SocialUserInput {
    * * Social Sign In
    */
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   google?: string;
 
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   @Field(_type => String, { nullable: true })
   facebook?: string;
 }
@@ -88,32 +99,59 @@ export class UpdateUserInput {
    * * Base
    */
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   firstName?: string;
 
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   lastName?: string;
 
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   email?: string;
 
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   password?: string;
 
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsEnum(Gender)
+  @IsNotEmpty()
   gender?: Gender;
 
   @Field(_type => Role, { nullable: true })
+  @IsOptional()
+  @IsEnum(Role)
+  @IsNotEmpty()
   role?: Role;
 
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   phoneNumber?: string;
 
   /**
    * * Social Sign In
    */
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   google?: string;
 
   @Field(_type => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   facebook?: string;
 }
